@@ -35,6 +35,21 @@ add_executable(${PROJECT_NAME}.elf
     CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c
     CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c
     CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c
+
+    # FreeRTOS kernel
+    CubeMX/Middlewares/Third_Party/FreeRTOS/Source/tasks.c
+    CubeMX/Middlewares/Third_Party/FreeRTOS/Source/queue.c
+    CubeMX/Middlewares/Third_Party/FreeRTOS/Source/list.c
+    CubeMX/Middlewares/Third_Party/FreeRTOS/Source/timers.c
+    CubeMX/Middlewares/Third_Party/FreeRTOS/Source/croutine.c
+    CubeMX/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c
+    CubeMX/Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c
+    
+    # FreeRTOS portable layer (Cortex-M4 with FPU)
+    CubeMX/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c
+    
+    # FreeRTOS heap implementation (heap_4.c)
+    CubeMX/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c
 )
 
 # Add this line after the add_executable command
@@ -48,6 +63,11 @@ target_include_directories(${PROJECT_NAME}.elf PRIVATE
     CubeMX/Drivers/CMSIS/Device/ST/STM32F4xx/Include
     CubeMX/Core/Inc
     CubeMX/Drivers/STM32F4xx_HAL_Driver/Inc
+
+    CubeMX/Middlewares/Third_Party/FreeRTOS/Source/include
+    CubeMX/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
+    CubeMX/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F
+    
     include
 )
 

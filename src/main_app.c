@@ -2,7 +2,12 @@
 #include "main_app.h"
 #include "main.h"
 
-void main_app(void)
+void app_init(void)
+{
+    app_run();
+}
+
+void app_run(void)
 {
     while (1)
     {

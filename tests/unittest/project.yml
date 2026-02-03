@@ -46,6 +46,9 @@
     - UNIT_TEST
   :test_preprocess:
     - UNIT_TEST
+  :release:
+    - STM32F407xx
+    - USE_HAL_DRIVER
 
 
 :cmock:
