@@ -1,0 +1,7 @@
+#ifndef UNITY_CONFIG_H
+#define UNITY_CONFIG_H
+
+#define UNITY_INCLUDE_DOUBLE
+#define UNITY_INCLUDE_FLOAT
+
+#endif

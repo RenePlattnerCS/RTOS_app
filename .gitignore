@@ -1,0 +1,30 @@
+.DS_Store
+.idea
+thumbs.db
+*.zip
+*.pyc
+*_pb2.py
+*.bak
+*.hex
+*.[oa]
+*.pb.go
+.vscode/ipch/**
+!.gitkeep
+
+_build
+build
+
+artifacts
+doc/**
+.unison*
+node_modules
+go.sum
+**/_build
+**/parking
+
+test/**/build/
+# tests/unittest/generated
+
+compile_commands.json
+# FIXME: remove this in case you want this to be available for everyone.
+.vscode/c_cpp_properties.json

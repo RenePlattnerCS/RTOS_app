@@ -1,0 +1,23 @@
+{
+  "name": "STM32F4 DevContainer",
+  "build": {
+    "dockerfile": "../builder.Dockerfile",
+    "context": ".."
+  },
+  "runArgs": [
+    "--privileged"  // required for USB / ST-Link access
+  ],
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "extensions": [
+    "ms-vscode.cpptools",
+    "marus25.cortex-debug",
+    "ms-vscode.cmake-tools"
+  ],
+  "remoteUser": "root",
+  "workspaceFolder": "/workspace",
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace,type=bind"
+  ]
+}
