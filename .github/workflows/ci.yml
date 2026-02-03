@@ -1,0 +1,90 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+        name: Setup Buildx
+
+      - name: Create docker cache folder
+        run: mkdir -p /tmp/docker
+
+      - name: Restore docker image from cache
+        id: cache-docker
+        uses: actions/cache@v4
+        with:
+          path: /tmp/docker
+          key: ${{ runner.os }}-docker-${{ hashFiles('builder.Dockerfile') }}
+
+      - name: Build docker builder-image
+        if: steps.cache-docker.outputs.cache-hit != 'true'
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: builder.Dockerfile
+          tags: cproject-builder:latest
+          outputs: type=docker,dest=/tmp/docker/${{ runner.os }}-builder-image.tar
+
+  build-and-test:
+    runs-on: ubuntu-latest
+    needs: docker-build
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Restore docker image from cache
+        id: cache-docker
+        uses: actions/cache@v4
+        with:
+          path: /tmp/docker
+          key: ${{ runner.os }}-docker-${{ hashFiles('builder.Dockerfile') }}
+
+      - name: Load docker image
+        run: |
+          docker load --input /tmp/docker/${{ runner.os }}-builder-image.tar
+          docker image ls -a
+
+      - name: Build library
+        run: |
+          docker run \
+            --rm \
+            --platform linux/amd64 \
+            --workdir /builder/mnt \
+            -v ${{ github.workspace }}:/builder/mnt \
+            cproject-builder:latest \
+            /bin/bash -c "rm -rf build; cmake -B build; cmake --build build"
+
+      - name: Run unit tests with coverage
+        run: |
+          docker run \
+            --rm \
+            --platform linux/amd64 \
+            --workdir /builder/mnt/tests/unittest \
+            -v ${{ github.workspace }}:/builder/mnt \
+            cproject-builder:latest \
+            /bin/bash -c "ceedling clobber; ceedling gcov:all; ceedling utils:gcov"
+
+      - name: Archive coverage results
+        shell: bash
+        run: |
+          staging="reports-${{ github.run_number }}"
+          mkdir -p "$staging"
+          cp -r tests/unittest/build/artifacts/gcov "$staging"
+          tar czf "$staging.tar.gz" "$staging"
+          echo "ASSET=$staging.tar.gz" >> $GITHUB_ENV
+
+      - name: Upload coverage artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports-${{ github.run_number }}
+          path: ${{ env.ASSET }}
+          retention-days: 3
