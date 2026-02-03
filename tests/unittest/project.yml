@@ -66,11 +66,11 @@
 # You will need to have gcov and gcovr both installed to make it work.
 # For more information on these options, see docs in plugins/gcov
 :gcov:
-  :reports:
-    - HtmlDetailed
-  :gcovr:
-    :html_medium_threshold: 75
-    :html_high_threshold: 90
+  :executable: gcov
+  :report:
+    :html: true
+    :text_summary: true
+  :test_file_suffix: _test.c
 
 #:tools:
 # Ceedling defaults to using gcc for compiling, linking, etc.
