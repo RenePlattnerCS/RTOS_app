@@ -5,19 +5,26 @@
     "context": ".."
   },
   "runArgs": [
-    "--privileged"  // required for USB / ST-Link access
+    "--privileged",
+    "--device=/dev/bus/usb:/dev/bus/usb"
   ],
-  "settings": {
-    "terminal.integrated.shell.linux": "/bin/bash"
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "ms-vscode.cpptools",
+        "marus25.cortex-debug",
+        "ms-vscode.cmake-tools"
+      ]
+    }
   },
-  "extensions": [
-    "ms-vscode.cpptools",
-    "marus25.cortex-debug",
-    "ms-vscode.cmake-tools"
-  ],
   "remoteUser": "root",
   "workspaceFolder": "/workspace",
   "mounts": [
-    "source=${localWorkspaceFolder},target=/workspace,type=bind"
-  ]
+    "source=${localWorkspaceFolder},target=/workspace,type=bind",
+    "source=/dev/bus/usb,target=/dev/bus/usb,type=bind"
+  ],
+  "postCreateCommand": "chmod 666 /dev/bus/usb/*/* 2>/dev/null || true"
 }

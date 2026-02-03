@@ -1,0 +1,25 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "cmake --build build",
+      "group": "build",
+      "problemMatcher": ["$gcc"]
+    }
+  ]
+}
+
+
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Kill OpenOCD",
+      "type": "shell",
+      "command": "pkill openocd || true",
+      "problemMatcher": []
+    }
+  ]
+}

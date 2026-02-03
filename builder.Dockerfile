@@ -70,6 +70,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     gdb-multiarch \
     openocd \
     dfu-util \
+    binutils-multiarch \
     && rm -rf /var/lib/apt/lists/*
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

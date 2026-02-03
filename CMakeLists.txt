@@ -12,6 +12,10 @@ set(CMAKE_C_STANDARD 11)
 # Compiler flags
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fdata-sections -ffunction-sections")
 
+# Add after your compiler flags
+set(CMAKE_C_FLAGS_DEBUG "-g3 -O0 -gdwarf-2")
+
+
 # Debug/Release flags
 set(CMAKE_C_FLAGS_DEBUG "-g3 -O0")
 set(CMAKE_C_FLAGS_RELEASE "-Os")
@@ -97,3 +101,4 @@ add_custom_command(TARGET ${PROJECT_NAME}.elf POST_BUILD
     COMMAND ${CMAKE_SIZE} $<TARGET_FILE:${PROJECT_NAME}.elf>
     COMMENT "Building ${PROJECT_NAME}.hex and ${PROJECT_NAME}.bin"
 )
+
