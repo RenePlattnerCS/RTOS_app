@@ -23,11 +23,18 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--gc-sections")
 # Add sources
 add_executable(${PROJECT_NAME}.elf
     src/main_app.c
+    src/tasks/blink_led.c
+    src/freertos_static.c
+
     CubeMX/Core/Src/main.c 
     CubeMX/Core/Src/stm32f4xx_it.c
     CubeMX/Core/Src/stm32f4xx_hal_msp.c
     CubeMX/Core/Src/system_stm32f4xx.c
+    CubeMX/Core/Src/stm32f4xx_hal_timebase_tim.c
+    
+
     CubeMX/startup_stm32f407xx.s
+    # HAL Driver sources
     CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
     CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c
     CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
@@ -35,6 +42,9 @@ add_executable(${PROJECT_NAME}.elf
     CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c
     CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c
     CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c
+    CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c
+    CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c
+    
 
     # FreeRTOS kernel
     CubeMX/Middlewares/Third_Party/FreeRTOS/Source/tasks.c
@@ -50,6 +60,8 @@ add_executable(${PROJECT_NAME}.elf
     
     # FreeRTOS heap implementation (heap_4.c)
     CubeMX/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c
+
+    CubeMX/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c
 )
 
 # Add this line after the add_executable command
@@ -67,6 +79,7 @@ target_include_directories(${PROJECT_NAME}.elf PRIVATE
     CubeMX/Middlewares/Third_Party/FreeRTOS/Source/include
     CubeMX/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
     CubeMX/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F
+
     
     include
 )

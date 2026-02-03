@@ -1,10 +1,11 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main_app.h"
+#include "blink_led.h"
 #include "main.h"
 
 void app_init(void)
 {
-    app_run();
+    BlinkLEDTask_Create();
 }
 
 void app_run(void)

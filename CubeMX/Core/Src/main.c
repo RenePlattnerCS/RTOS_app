@@ -48,13 +48,6 @@ const osThreadAttr_t defaultTask_attributes = {
     .stack_size = 128 * 4,
     .priority   = (osPriority_t) osPriorityNormal,
 };
-/* Definitions for blinkLEDtask */
-osThreadId_t blinkLEDtaskHandle;
-const osThreadAttr_t blinkLEDtask_attributes = {
-    .name       = "blinkLEDtask",
-    .stack_size = 128 * 4,
-    .priority   = (osPriority_t) osPriorityLow,
-};
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -63,7 +56,6 @@ const osThreadAttr_t blinkLEDtask_attributes = {
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 void StartDefaultTask(void *argument);
-void StartTask02(void *argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -89,7 +81,6 @@ int main(void)
     HAL_Init();
 
     /* USER CODE BEGIN Init */
-
     /* USER CODE END Init */
 
     /* Configure the system clock */
@@ -128,15 +119,15 @@ int main(void)
     /* creation of defaultTask */
     defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
 
-    /* creation of blinkLEDtask */
-    blinkLEDtaskHandle = osThreadNew(StartTask02, NULL, &blinkLEDtask_attributes);
-
     /* USER CODE BEGIN RTOS_THREADS */
     /* add threads, ... */
+    // app_init();
+
     /* USER CODE END RTOS_THREADS */
 
     /* USER CODE BEGIN RTOS_EVENTS */
     /* add events, ... */
+    app_init();
     /* USER CODE END RTOS_EVENTS */
 
     /* Start scheduler */
@@ -146,7 +137,7 @@ int main(void)
 
     /* Infinite loop */
     /* USER CODE BEGIN WHILE */
-    app_init();
+    // vTaskStartScheduler();
 
     while (1)
     {
@@ -254,27 +245,9 @@ void StartDefaultTask(void *argument)
     /* USER CODE END 5 */
 }
 
-/* USER CODE BEGIN Header_StartTask02 */
-/**
- * @brief Function implementing the blinkLEDtask thread.
- * @param argument: Not used
- * @retval None
- */
-/* USER CODE END Header_StartTask02 */
-void StartTask02(void *argument)
-{
-    /* USER CODE BEGIN StartTask02 */
-    /* Infinite loop */
-    for (;;)
-    {
-        osDelay(1);
-    }
-    /* USER CODE END StartTask02 */
-}
-
 /**
  * @brief  Period elapsed callback in non blocking mode
- * @note   This function is called  when TIM6 interrupt took place, inside
+ * @note   This function is called  when TIM7 interrupt took place, inside
  * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
  * a global variable "uwTick" used as application time base.
  * @param  htim : TIM handle
@@ -285,7 +258,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     /* USER CODE BEGIN Callback 0 */
 
     /* USER CODE END Callback 0 */
-    if (htim->Instance == TIM6)
+    if (htim->Instance == TIM7)
     {
         HAL_IncTick();
     }
