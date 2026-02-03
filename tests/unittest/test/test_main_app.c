@@ -15,5 +15,5 @@ void tearDown(void)
 
 void test_add(void)
 {
-    TEST_ASSERT_EQUAL_UINT32(6, add(2, 3));
+    TEST_ASSERT_EQUAL_UINT32(5, add(2, 3));
 }
