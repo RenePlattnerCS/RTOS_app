@@ -71,6 +71,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     openocd \
     dfu-util \
     binutils-multiarch \
+    binutils-arm-none-eabi \
     && rm -rf /var/lib/apt/lists/*
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

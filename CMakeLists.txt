@@ -10,11 +10,13 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_C_STANDARD 11)
 
 # Compiler flags
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fdata-sections -ffunction-sections")
+#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fdata-sections -ffunction-sections")
 
 # Add after your compiler flags
-set(CMAKE_C_FLAGS_DEBUG "-g3 -O0 -gdwarf-2")
+#set(CMAKE_C_FLAGS_DEBUG "-g3 -O0 -gdwarf-2")
 
+set(CMAKE_C_FLAGS_DEBUG "-g3 -O0 -gdwarf-2 -Wall -fdata-sections -ffunction-sections")
+set(CMAKE_C_FLAGS_RELEASE "-Os -Wall -fdata-sections -ffunction-sections")
 
 # Debug/Release flags
 set(CMAKE_C_FLAGS_DEBUG "-g3 -O0")
