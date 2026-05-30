@@ -43,11 +43,8 @@ RUN groupadd -g ${GID} vscode 2>/dev/null || true && \
 
 RUN echo "alias ll='ls -laGFh'" >> /home/vscode/.bashrc
 
-VOLUME ["/builder/mnt"]
 WORKDIR /workspace
 
-#VOLUME ["/builder/mnt"]
-#WORKDIR /builder/mnt
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # install clang tools
@@ -111,11 +108,13 @@ RUN run-clang-tidy --version
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # install unity and ceedling
 
-# install unity cmock and ceedling (unit test environment)
-RUN gem install ceedling
-# set standard encoding to UTF-8 for ruby (and thus ceedling)
-ENV RUBYOPT "-KU -E utf-8:utf-8"
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ruby-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN gem install ceedling
+ENV RUBYOPT "-KU -E utf-8:utf-8"
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # cleanup and vulnerability fixes
 
