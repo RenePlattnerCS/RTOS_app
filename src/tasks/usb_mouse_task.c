@@ -1,8 +1,8 @@
 #include "usb_mouse_task.h"
-#include "usb/usbd_framework.h"
-#include "logger/logger.h"
 #include "FreeRTOS.h"
+#include "logger/logger.h"
 #include "task.h"
+#include "usb/usbd_framework.h"
 
 static TaskHandle_t usb_mouse_task_handle = NULL;
 
@@ -12,17 +12,11 @@ static void UsbMouseTask(void *argument)
     for (;;)
     {
         usbd_poll();
-        taskYIELD();
+        vTaskDelay(pdMS_TO_TICKS(1));
     }
 }
 
 void UsbMouseTask_Create(void)
 {
-    xTaskCreate(
-        UsbMouseTask,
-        "UsbMouse",
-        256,
-        NULL,
-        3,
-        &usb_mouse_task_handle);
+    xTaskCreate(UsbMouseTask, "UsbMouse", 256, NULL, 3, &usb_mouse_task_handle);
 }
