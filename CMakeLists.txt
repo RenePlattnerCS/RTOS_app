@@ -31,6 +31,7 @@ add_executable(${PROJECT_NAME}.elf
     src/main_app.c
     src/tasks/blink_led.c
     src/tasks/servo_task.c
+    src/tasks/usb_mouse_task.c
     src/freertos_static.c
     src/tasks/blink_led.c
     src/logger/itm.c
