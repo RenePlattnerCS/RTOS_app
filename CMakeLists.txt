@@ -61,6 +61,9 @@ add_executable(${PROJECT_NAME}.elf
     CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c
     CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c
     CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c
+    CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.c
+    CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c
+    CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c
     
 
     # FreeRTOS kernel
