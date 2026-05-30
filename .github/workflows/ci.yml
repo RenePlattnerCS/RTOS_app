@@ -50,7 +50,7 @@ jobs:
             --workdir /workspace \
             -v ${{ github.workspace }}:/workspace \
             cproject-builder:latest \
-            /bin/bash -c "rm -rf build; cmake -B build; cmake --build build"
+            /bin/bash -c "rm -rf build; cmake -DCMAKE_BUILD_TYPE=Debug -S . -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE=arm-none-eabi-gcc.cmake && cmake --build build"
       - name: Run unit tests
         run: |
           docker run \
