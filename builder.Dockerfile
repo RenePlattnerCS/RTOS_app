@@ -1,8 +1,5 @@
-# update the base_tag to the version of the base image
-# e.g., "bullseye" is currently (2024-02) still the latest version for vscode devcontainers:
-# https://hub.docker.com/_/microsoft-vscode-devcontainers
 
-ARG base_tag=bullseye
+ARG base_tag=bookworm
 ARG base_img=mcr.microsoft.com/vscode/devcontainers/base:dev-${base_tag}
 # ARG base_img=debian:${base_tag}
 
@@ -55,7 +52,7 @@ WORKDIR /workspace
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # install clang tools
 
-ARG base_tag=bullseye
+ARG base_tag=bookworm
 ARG llvm_version=16
 RUN apt-get update --fix-missing && apt-get -y upgrade
 RUN apt-get install -y --no-install-recommends \
@@ -64,8 +61,10 @@ RUN apt-get install -y --no-install-recommends \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl --fail --silent --show-error --location https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
-RUN echo "deb http://apt.llvm.org/$base_tag/ llvm-toolchain-$base_tag-$llvm_version main" >> /etc/apt/sources.list.d/llvm.list
+RUN curl --fail --silent --show-error --location https://apt.llvm.org/llvm-snapshot.gpg.key \
+    | gpg --dearmor -o /etc/apt/trusted.gpg.d/llvm.gpg
+RUN echo "deb [signed-by=/etc/apt/trusted.gpg.d/llvm.gpg] http://apt.llvm.org/$base_tag/ llvm-toolchain-$base_tag-$llvm_version main" \
+    >> /etc/apt/sources.list.d/llvm.list
 
 RUN apt-get update --fix-missing && apt-get -y upgrade
 RUN apt-get install -y --no-install-recommends \

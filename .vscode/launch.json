@@ -9,20 +9,34 @@
       "cwd": "${workspaceRoot}",
       "executable": "${workspaceRoot}/build/BlinkLED.elf",
       "device": "STM32F407VG",
-      "showDevDebugOutput": "raw",
       "configFiles": [
-        "/usr/share/openocd/scripts/interface/stlink.cfg",
-        "/usr/share/openocd/scripts/target/stm32f4x.cfg"
+        "interface/stlink.cfg",
+        "target/stm32f4x.cfg"
       ],
       "gdbPath": "gdb-multiarch",
       "toolchainPrefix": "arm-none-eabi",
       "runToEntryPoint": "main",
       "preLaunchCommands": [
-        "set mem inaccessible-by-default off",
-        // Add path substitutions for your source files
-        "set substitute-path /workspace/CubeMX ${workspaceRoot}",
-        "dir ${workspaceRoot}"
-      ]
+        "set mem inaccessible-by-default off"
+      ],
+      "postLaunchCommands": [
+        "monitor reset halt",
+        "load",
+        "monitor reset halt"
+      ],
+      "swoConfig": {
+        "enabled": true,
+        "cpuFrequency": 168000000,
+        "swoFrequency": 2000000,
+        "source": "probe",
+        "decoders": [
+          {
+            "type": "console",
+            "label": "ITM",
+            "port": 0
+          }
+        ]
+      }
     }
   ]
 }

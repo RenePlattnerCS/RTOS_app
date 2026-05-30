@@ -2,11 +2,16 @@
   "name": "STM32F4 DevContainer",
   "build": {
     "dockerfile": "../builder.Dockerfile",
-    "context": ".."
+    "context": "..",
+    "args": {
+      "UID": "${localEnv:UID:1000}",
+      "GID": "${localEnv:GID:1000}"
+    }
   },
   "runArgs": [
     "--privileged",
-    "--device=/dev/bus/usb:/dev/bus/usb"
+    "--device=/dev/bus/usb:/dev/bus/usb",
+    "--user=${localEnv:UID:1000}:${localEnv:GID:1000}"
   ],
   "customizations": {
     "vscode": {
