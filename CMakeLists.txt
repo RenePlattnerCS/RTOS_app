@@ -15,12 +15,12 @@ set(CMAKE_C_STANDARD 11)
 # Add after your compiler flags
 #set(CMAKE_C_FLAGS_DEBUG "-g3 -O0 -gdwarf-2")
 
-set(CMAKE_C_FLAGS_DEBUG "-g3 -O0 -gdwarf-2 -Wall -fdata-sections -ffunction-sections")
-set(CMAKE_C_FLAGS_RELEASE "-Os -Wall -fdata-sections -ffunction-sections")
+#set(CMAKE_C_FLAGS_DEBUG "-g3 -O0 -gdwarf-2 -Wall -fdata-sections -ffunction-sections")
+#set(CMAKE_C_FLAGS_RELEASE "-Os -Wall -fdata-sections -ffunction-sections")
 
 # Debug/Release flags
-set(CMAKE_C_FLAGS_DEBUG "-g3 -O0")
-set(CMAKE_C_FLAGS_RELEASE "-Os")
+set(CMAKE_C_FLAGS_DEBUG   "-g3 -O0 -gdwarf-2 -Wall -fdata-sections -ffunction-sections")
+set(CMAKE_C_FLAGS_RELEASE "-Os -Wall -fdata-sections -ffunction-sections")
 
 # Linker flags - you'll need to specify your linker script
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lc -lm -lnosys")
@@ -30,6 +30,7 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--gc-sections")
 add_executable(${PROJECT_NAME}.elf
     src/main_app.c
     src/tasks/blink_led.c
+    src/tasks/servo_task.c
     src/freertos_static.c
 
     CubeMX/Core/Src/main.c 
@@ -50,6 +51,8 @@ add_executable(${PROJECT_NAME}.elf
     CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c
     CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c
     CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c
+    CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c
+    CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c
     
 
     # FreeRTOS kernel

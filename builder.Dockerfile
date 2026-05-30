@@ -35,8 +35,22 @@ ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 RUN echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen && /usr/sbin/locale-gen
 RUN echo "alias ll='ls -laGFh'" >> /root/.bashrc
 
+# Create non-root user matching host user ID for file permissions
+ARG UID=1000
+ARG GID=1000
+
+RUN groupadd -g ${GID} vscode 2>/dev/null || true && \
+    useradd -m -u ${UID} -g ${GID} -s /bin/bash vscode 2>/dev/null || true && \
+    echo "vscode ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/vscode && \
+    chmod 0440 /etc/sudoers.d/vscode
+
+RUN echo "alias ll='ls -laGFh'" >> /home/vscode/.bashrc
+
 VOLUME ["/builder/mnt"]
-WORKDIR /builder/mnt
+WORKDIR /workspace
+
+#VOLUME ["/builder/mnt"]
+#WORKDIR /builder/mnt
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # install clang tools

@@ -20,7 +20,7 @@
       ]
     }
   },
-  "remoteUser": "root",
+  "remoteUser": "vscode",
   "workspaceFolder": "/workspace",
   "mounts": [
     "source=${localWorkspaceFolder},target=/workspace,type=bind",
