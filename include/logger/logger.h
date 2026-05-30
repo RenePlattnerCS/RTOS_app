@@ -1,3 +1,6 @@
+#ifndef LOGGER_H
+#define LOGGER_H
+
 #include <stdint.h>
 
 typedef enum
@@ -7,10 +10,22 @@ typedef enum
     LOG_LEVEL_DEBUG
 } LogLevel;
 
-/// The global variable `system_log_level` should be defined and given the desired log level.
 extern LogLevel system_log_level;
 
-void log_error(char const * const format, ...);
-void log_info(char const * const format, ...);
-void log_debug(char const * const format, ...);
-void log_debug_array(char const * const label, void const *array, uint16_t const len);
+#ifndef NDEBUG
+
+void log_error(char const *format, ...);
+void log_info(char const *format, ...);
+void log_debug(char const *format, ...);
+void log_debug_array(char const *label, void const *array, uint16_t len);
+
+#else
+
+#define log_error(...)       ((void)0)
+#define log_info(...)        ((void)0)
+#define log_debug(...)       ((void)0)
+#define log_debug_array(...) ((void)0)
+
+#endif /* NDEBUG */
+
+#endif /* LOGGER_H */

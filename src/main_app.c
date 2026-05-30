@@ -7,7 +7,7 @@
 
 void app_init(void)
 {
-    log_info("System initialized with ITM enabled");
+    log_info("Initializing Tasks...");
     BlinkLEDTask_Create();
     ServoTask_Create();
 }

@@ -20,7 +20,7 @@ set(CMAKE_C_STANDARD 11)
 
 # Debug/Release flags
 set(CMAKE_C_FLAGS_DEBUG   "-g3 -O0 -gdwarf-2 -Wall -fdata-sections -ffunction-sections")
-set(CMAKE_C_FLAGS_RELEASE "-Os -Wall -fdata-sections -ffunction-sections")
+set(CMAKE_C_FLAGS_RELEASE "-Os -DNDEBUG -Wall -fdata-sections -ffunction-sections")
 
 # Linker flags - you'll need to specify your linker script
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lc -lm -lnosys")
