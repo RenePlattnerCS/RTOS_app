@@ -109,11 +109,20 @@ RUN run-clang-tidy --version
 # install unity and ceedling
 
 
+# Install Ruby development headers first
+# Install Ruby development headers and bundler
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ruby-dev \
+    bundler \
     && rm -rf /var/lib/apt/lists/*
 
-RUN gem install ceedling
+# Install a stable, tested version of Ceedling with dependencies
+RUN gem install bundler && \
+    gem install ceedling -v '0.31.1' --no-document
+
+# Test that Ceedling works (catch errors at build time)
+RUN ceedling version
+
 ENV RUBYOPT "-KU -E utf-8:utf-8"
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # cleanup and vulnerability fixes
