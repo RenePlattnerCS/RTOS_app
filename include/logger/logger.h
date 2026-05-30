@@ -19,12 +19,18 @@ void log_info(char const *format, ...);
 void log_debug(char const *format, ...);
 void log_debug_array(char const *label, void const *array, uint16_t len);
 
+void assert_failed_handler(char const *file, int line, char const *expr);
+#undef assert
+#define assert(expr) ((expr) ? (void)0 : assert_failed_handler(__FILE__, __LINE__, #expr))
+
 #else
 
 #define log_error(...)       ((void)0)
 #define log_info(...)        ((void)0)
 #define log_debug(...)       ((void)0)
 #define log_debug_array(...) ((void)0)
+#undef assert
+#define assert(expr)         ((void)0)
 
 #endif /* NDEBUG */
 
