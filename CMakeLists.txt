@@ -120,6 +120,7 @@ target_include_directories(${PROJECT_NAME}.elf PRIVATE
 target_compile_definitions(${PROJECT_NAME}.elf PRIVATE
     STM32F407xx
     USE_HAL_DRIVER
+    $<$<CONFIG:Debug>:SYSVIEW_ENABLE>
 )
 
 # Create hex and bin files

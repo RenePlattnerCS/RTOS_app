@@ -1,3 +1,4 @@
+#ifdef SYSVIEW_ENABLE
 #include "SEGGER_SYSVIEW_REC.h"
 #include "stm32f4xx_hal.h"
 
@@ -52,3 +53,5 @@ void SYSVIEW_UART_Config(void)
 {
     HAL_UART_Receive_IT(&huart2, (uint8_t *)&_rxByte, 1);
 }
+
+#endif /* SYSVIEW_ENABLE */

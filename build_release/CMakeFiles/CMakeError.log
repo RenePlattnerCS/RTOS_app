@@ -1,0 +1,67 @@
+Detecting C compiler ABI info failed to compile with the following output:
+Change Dir: /workspace/build_release/CMakeFiles/CMakeScratch/TryCompile-Y0sYiu
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_51e08/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_51e08.dir/build.make CMakeFiles/cmTC_51e08.dir/build
+gmake[1]: Entering directory '/workspace/build_release/CMakeFiles/CMakeScratch/TryCompile-Y0sYiu'
+Building C object CMakeFiles/cmTC_51e08.dir/CMakeCCompilerABI.c.obj
+/usr/bin/arm-none-eabi-gcc   -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard    -v -o CMakeFiles/cmTC_51e08.dir/CMakeCCompilerABI.c.obj -c /usr/share/cmake-3.25/Modules/CMakeCCompilerABI.c
+Using built-in specs.
+COLLECT_GCC=/usr/bin/arm-none-eabi-gcc
+Target: arm-none-eabi
+Configured with: ../configure --build=x86_64-linux-gnu --prefix=/usr --includedir='/usr/lib/include' --mandir='/usr/lib/share/man' --infodir='/usr/lib/share/info' --sysconfdir=/etc --localstatedir=/var --disable-option-checking --disable-silent-rules --libdir='/usr/lib/lib/x86_64-linux-gnu' --libexecdir='/usr/lib/lib/x86_64-linux-gnu' --disable-maintainer-mode --disable-dependency-tracking --mandir=/usr/share/man --enable-languages=c,c++,lto --enable-multilib --disable-decimal-float --disable-libffi --disable-libgomp --disable-libmudflap --disable-libquadmath --disable-libssp --disable-libstdcxx-pch --disable-nls --disable-shared --disable-threads --enable-tls --build=x86_64-linux-gnu --target=arm-none-eabi --with-system-zlib --with-gnu-as --with-gnu-ld --with-pkgversion=15:12.2.rel1-1 --without-included-gettext --prefix=/usr/lib --infodir=/usr/share/doc/gcc-arm-none-eabi/info --htmldir=/usr/share/doc/gcc-arm-none-eabi/html --pdfdir=/usr/share/doc/gcc-arm-none-eabi/pdf --bindir=/usr/bin --libexecdir=/usr/lib --libdir=/usr/lib --disable-libstdc++-v3 --host=x86_64-linux-gnu --with-headers=no --without-newlib --with-multilib-list=rmprofile,aprofile ASFLAGS= CFLAGS='-g -O2 -ffile-prefix-map=/build/gcc-arm-none-eabi-8GAN2q/gcc-arm-none-eabi-12.2.rel1=. -fstack-protector-strong' CPPFLAGS='-Wdate-time -D_FORTIFY_SOURCE=2' CXXFLAGS='-g -O2 -ffile-prefix-map=/build/gcc-arm-none-eabi-8GAN2q/gcc-arm-none-eabi-12.2.rel1=. -fstack-protector-strong' DFLAGS=-frelease FCFLAGS='-g -O2 -ffile-prefix-map=/build/gcc-arm-none-eabi-8GAN2q/gcc-arm-none-eabi-12.2.rel1=. -fstack-protector-strong' FFLAGS='-g -O2 -ffile-prefix-map=/build/gcc-arm-none-eabi-8GAN2q/gcc-arm-none-eabi-12.2.rel1=. -fstack-protector-strong' GCJFLAGS='-g -O2 -ffile-prefix-map=/build/gcc-arm-none-eabi-8GAN2q/gcc-arm-none-eabi-12.2.rel1=. -fstack-protector-strong' LDFLAGS=-Wl,-z,relro OBJCFLAGS='-g -O2 -ffile-prefix-map=/build/gcc-arm-none-eabi-8GAN2q/gcc-arm-none-eabi-12.2.rel1=. -fstack-protector-strong' OBJCXXFLAGS='-g -O2 -ffile-prefix-map=/build/gcc-arm-none-eabi-8GAN2q/gcc-arm-none-eabi-12.2.rel1=. -fstack-protector-strong' INHIBIT_LIBC_CFLAGS=-DUSE_TM_CLONE_REGISTRY=0 AR_FOR_TARGET=arm-none-eabi-ar AS_FOR_TARGET=arm-none-eabi-as LD_FOR_TARGET=arm-none-eabi-ld NM_FOR_TARGET=arm-none-eabi-nm OBJDUMP_FOR_TARGET=arm-none-eabi-objdump RANLIB_FOR_TARGET=arm-none-eabi-ranlib READELF_FOR_TARGET=arm-none-eabi-readelf STRIP_FOR_TARGET=arm-none-eabi-strip SED=/bin/sed SHELL=/bin/sh BASH=/bin/bash CONFIG_SHELL=/bin/bash
+Thread model: single
+Supported LTO compression algorithms: zlib
+gcc version 12.2.1 20221205 (15:12.2.rel1-1) 
+COLLECT_GCC_OPTIONS='-mcpu=cortex-m4' '-mthumb' '-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-v' '-o' 'CMakeFiles/cmTC_51e08.dir/CMakeCCompilerABI.c.obj' '-c' '-mlibarch=armv7e-m+fp' '-march=armv7e-m+fp' '-dumpdir' 'CMakeFiles/cmTC_51e08.dir/'
+ /usr/lib/gcc/arm-none-eabi/12.2.1/cc1 -quiet -v -imultilib thumb/v7e-m+fp/hard -D__USES_INITFINI__ /usr/share/cmake-3.25/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_51e08.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mlibarch=armv7e-m+fp -march=armv7e-m+fp -version -o /tmp/claude-1000/ccMkhKzC.s
+GNU C17 (15:12.2.rel1-1) version 12.2.1 20221205 (arm-none-eabi)
+	compiled by GNU C version 12.2.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version isl-0.25-GMP
+
+warning: MPFR header version 4.1.0 differs from library version 4.2.0.
+warning: MPC header version 1.2.1 differs from library version 1.3.1.
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring nonexistent directory "/usr/lib/gcc/arm-none-eabi/12.2.1/../../../arm-none-eabi/sys-include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /usr/lib/gcc/arm-none-eabi/12.2.1/include
+ /usr/lib/gcc/arm-none-eabi/12.2.1/include-fixed
+ /usr/lib/gcc/arm-none-eabi/12.2.1/../../../arm-none-eabi/include
+End of search list.
+GNU C17 (15:12.2.rel1-1) version 12.2.1 20221205 (arm-none-eabi)
+	compiled by GNU C version 12.2.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version isl-0.25-GMP
+
+warning: MPFR header version 4.1.0 differs from library version 4.2.0.
+warning: MPC header version 1.2.1 differs from library version 1.3.1.
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 2c17be7ce85023cb50aa5c4b2860f512
+COLLECT_GCC_OPTIONS='-mcpu=cortex-m4' '-mthumb' '-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-v' '-o' 'CMakeFiles/cmTC_51e08.dir/CMakeCCompilerABI.c.obj' '-c' '-mlibarch=armv7e-m+fp' '-march=armv7e-m+fp' '-dumpdir' 'CMakeFiles/cmTC_51e08.dir/'
+ /usr/lib/gcc/arm-none-eabi/12.2.1/../../../arm-none-eabi/bin/as -v -march=armv7e-m+fp -mfloat-abi=hard -mfpu=fpv4-sp-d16 -meabi=5 -o CMakeFiles/cmTC_51e08.dir/CMakeCCompilerABI.c.obj /tmp/claude-1000/ccMkhKzC.s
+GNU assembler version 2.40 (arm-none-eabi) using BFD version (2.40-2+18+b1) 2.40
+COMPILER_PATH=/usr/lib/gcc/arm-none-eabi/12.2.1/:/usr/lib/gcc/arm-none-eabi/12.2.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/12.2.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/12.2.1/../../../arm-none-eabi/bin/
+LIBRARY_PATH=/usr/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/:/usr/lib/gcc/arm-none-eabi/12.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/:/usr/lib/gcc/arm-none-eabi/12.2.1/:/usr/lib/gcc/arm-none-eabi/12.2.1/../../../arm-none-eabi/lib/
+COLLECT_GCC_OPTIONS='-mcpu=cortex-m4' '-mthumb' '-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-v' '-o' 'CMakeFiles/cmTC_51e08.dir/CMakeCCompilerABI.c.obj' '-c' '-mlibarch=armv7e-m+fp' '-march=armv7e-m+fp' '-dumpdir' 'CMakeFiles/cmTC_51e08.dir/CMakeCCompilerABI.c.'
+Linking C executable cmTC_51e08
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_51e08.dir/link.txt --verbose=1
+/usr/bin/arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard -v CMakeFiles/cmTC_51e08.dir/CMakeCCompilerABI.c.obj -o cmTC_51e08 
+Using built-in specs.
+COLLECT_GCC=/usr/bin/arm-none-eabi-gcc
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/arm-none-eabi/12.2.1/lto-wrapper
+Target: arm-none-eabi
+Configured with: ../configure --build=x86_64-linux-gnu --prefix=/usr --includedir='/usr/lib/include' --mandir='/usr/lib/share/man' --infodir='/usr/lib/share/info' --sysconfdir=/etc --localstatedir=/var --disable-option-checking --disable-silent-rules --libdir='/usr/lib/lib/x86_64-linux-gnu' --libexecdir='/usr/lib/lib/x86_64-linux-gnu' --disable-maintainer-mode --disable-dependency-tracking --mandir=/usr/share/man --enable-languages=c,c++,lto --enable-multilib --disable-decimal-float --disable-libffi --disable-libgomp --disable-libmudflap --disable-libquadmath --disable-libssp --disable-libstdcxx-pch --disable-nls --disable-shared --disable-threads --enable-tls --build=x86_64-linux-gnu --target=arm-none-eabi --with-system-zlib --with-gnu-as --with-gnu-ld --with-pkgversion=15:12.2.rel1-1 --without-included-gettext --prefix=/usr/lib --infodir=/usr/share/doc/gcc-arm-none-eabi/info --htmldir=/usr/share/doc/gcc-arm-none-eabi/html --pdfdir=/usr/share/doc/gcc-arm-none-eabi/pdf --bindir=/usr/bin --libexecdir=/usr/lib --libdir=/usr/lib --disable-libstdc++-v3 --host=x86_64-linux-gnu --with-headers=no --without-newlib --with-multilib-list=rmprofile,aprofile ASFLAGS= CFLAGS='-g -O2 -ffile-prefix-map=/build/gcc-arm-none-eabi-8GAN2q/gcc-arm-none-eabi-12.2.rel1=. -fstack-protector-strong' CPPFLAGS='-Wdate-time -D_FORTIFY_SOURCE=2' CXXFLAGS='-g -O2 -ffile-prefix-map=/build/gcc-arm-none-eabi-8GAN2q/gcc-arm-none-eabi-12.2.rel1=. -fstack-protector-strong' DFLAGS=-frelease FCFLAGS='-g -O2 -ffile-prefix-map=/build/gcc-arm-none-eabi-8GAN2q/gcc-arm-none-eabi-12.2.rel1=. -fstack-protector-strong' FFLAGS='-g -O2 -ffile-prefix-map=/build/gcc-arm-none-eabi-8GAN2q/gcc-arm-none-eabi-12.2.rel1=. -fstack-protector-strong' GCJFLAGS='-g -O2 -ffile-prefix-map=/build/gcc-arm-none-eabi-8GAN2q/gcc-arm-none-eabi-12.2.rel1=. -fstack-protector-strong' LDFLAGS=-Wl,-z,relro OBJCFLAGS='-g -O2 -ffile-prefix-map=/build/gcc-arm-none-eabi-8GAN2q/gcc-arm-none-eabi-12.2.rel1=. -fstack-protector-strong' OBJCXXFLAGS='-g -O2 -ffile-prefix-map=/build/gcc-arm-none-eabi-8GAN2q/gcc-arm-none-eabi-12.2.rel1=. -fstack-protector-strong' INHIBIT_LIBC_CFLAGS=-DUSE_TM_CLONE_REGISTRY=0 AR_FOR_TARGET=arm-none-eabi-ar AS_FOR_TARGET=arm-none-eabi-as LD_FOR_TARGET=arm-none-eabi-ld NM_FOR_TARGET=arm-none-eabi-nm OBJDUMP_FOR_TARGET=arm-none-eabi-objdump RANLIB_FOR_TARGET=arm-none-eabi-ranlib READELF_FOR_TARGET=arm-none-eabi-readelf STRIP_FOR_TARGET=arm-none-eabi-strip SED=/bin/sed SHELL=/bin/sh BASH=/bin/bash CONFIG_SHELL=/bin/bash
+Thread model: single
+Supported LTO compression algorithms: zlib
+gcc version 12.2.1 20221205 (15:12.2.rel1-1) 
+COMPILER_PATH=/usr/lib/gcc/arm-none-eabi/12.2.1/:/usr/lib/gcc/arm-none-eabi/12.2.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/12.2.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/12.2.1/../../../arm-none-eabi/bin/
+LIBRARY_PATH=/usr/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/:/usr/lib/gcc/arm-none-eabi/12.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/:/usr/lib/gcc/arm-none-eabi/12.2.1/:/usr/lib/gcc/arm-none-eabi/12.2.1/../../../arm-none-eabi/lib/
+COLLECT_GCC_OPTIONS='-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-mcpu=cortex-m4' '-mthumb' '-mfpu=fpv4-sp-d16' '-mfloat-abi=hard' '-v' '-o' 'cmTC_51e08' '-mlibarch=armv7e-m+fp' '-march=armv7e-m+fp' '-dumpdir' 'cmTC_51e08.'
+ /usr/lib/gcc/arm-none-eabi/12.2.1/collect2 -plugin /usr/lib/gcc/arm-none-eabi/12.2.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/arm-none-eabi/12.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/claude-1000/ccIwmLq6.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -X -o cmTC_51e08 /usr/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/crti.o /usr/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/crtbegin.o /usr/lib/gcc/arm-none-eabi/12.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o -L/usr/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard -L/usr/lib/gcc/arm-none-eabi/12.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard -L/usr/lib/gcc/arm-none-eabi/12.2.1 -L/usr/lib/gcc/arm-none-eabi/12.2.1/../../../arm-none-eabi/lib CMakeFiles/cmTC_51e08.dir/CMakeCCompilerABI.c.obj --start-group -lgcc -lc --end-group /usr/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/crtend.o /usr/lib/gcc/arm-none-eabi/12.2.1/thumb/v7e-m+fp/hard/crtn.o
+/usr/lib/gcc/arm-none-eabi/12.2.1/../../../arm-none-eabi/bin/ld: /usr/lib/gcc/arm-none-eabi/12.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a(lib_a-exit.o): in function `exit':
+/home/pere/src/newlib-salsa/build/arm-none-eabi/thumb/v7e-m+fp/hard/newlib/libc/stdlib/../../../../../../../../newlib/libc/stdlib/exit.c:64: undefined reference to `_exit'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_51e08.dir/build.make:99: cmTC_51e08] Error 1
+gmake[1]: Leaving directory '/workspace/build_release/CMakeFiles/CMakeScratch/TryCompile-Y0sYiu'
+gmake: *** [Makefile:127: cmTC_51e08/fast] Error 2
+
+
+
+

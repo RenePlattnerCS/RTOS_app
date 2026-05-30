@@ -7,22 +7,16 @@
 
 LogLevel system_log_level = LOG_LEVEL_DEBUG;
 
-/** \brief Redirects `printf()` output to the serial wire out (SWO).
- * This function overrides a weak function symbol and is not to be used directly.
- */
+#ifndef NDEBUG
 
-char const *const _get_log_level_string(LogLevel const log_level)
+static char const *_get_log_level_string(LogLevel const log_level)
 {
     switch (log_level)
     {
-        case LOG_LEVEL_ERROR:
-            return "ERROR";
-        case LOG_LEVEL_INFORMATION:
-            return "INFO";
-        case LOG_LEVEL_DEBUG:
-            return "DEBUG";
-        default:
-            return "UNKNOWN";
+        case LOG_LEVEL_ERROR:       return "ERROR";
+        case LOG_LEVEL_INFORMATION: return "INFO";
+        case LOG_LEVEL_DEBUG:       return "DEBUG";
+        default:                    return "UNKNOWN";
     }
 }
 
@@ -30,7 +24,6 @@ static void _log(LogLevel const log_level, char const *const format, va_list arg
 {
     if (log_level > system_log_level)
         return;
-
     printf("[%s] ", _get_log_level_string(log_level));
     vfprintf(stdout, format, args);
     printf("\n");
@@ -60,53 +53,26 @@ void log_debug(char const *const format, ...)
     va_end(args);
 }
 
-/** \brief Log the content of an array.
- * \param label The label of the array.
- * \param array Pointer to the array.
- * \param len The length of data in bytes.
- */
 void log_debug_array(char const *const label, void const *array, uint16_t const len)
 {
     if (LOG_LEVEL_DEBUG > system_log_level)
         return;
-
     printf("[%s] %s[%d]: {", _get_log_level_string(LOG_LEVEL_DEBUG), label, len);
     for (uint16_t i = 0; i < len; i++)
     {
-        uint8_t val = *((uint8_t *) (array + i));
+        uint8_t val = *((uint8_t *)(array + i));
         printf("0x%02X", val);
-
-        // Add ", " after all elements except the last one.
         if (i < len - 1)
-        {
             printf(", ");
-        }
     }
     printf("}\n");
 }
 
-// Minimal syscall stubs to silence linker warnings
-int _close(int file)
-{
-    return -1;
-}
+#endif /* NDEBUG */
 
-int _fstat(int file, void *st)
-{
-    return -1;
-}
-
-int _isatty(int file)
-{
-    return (file == 1 || file == 2) ? 1 : 0;
-}
-
-int _lseek(int file, int ptr, int dir)
-{
-    return 0;
-}
-
-int _read(int file, char *ptr, int len)
-{
-    return 0;
-}
+// Syscall stubs — needed by the linker in both debug and release.
+int _close(int file)   { (void)file; return -1; }
+int _fstat(int file, void *st)  { (void)file; (void)st; return -1; }
+int _isatty(int file)  { return (file == 1 || file == 2) ? 1 : 0; }
+int _lseek(int file, int ptr, int dir) { (void)file; (void)ptr; (void)dir; return 0; }
+int _read(int file, char *ptr, int len) { (void)file; (void)ptr; (void)len; return 0; }

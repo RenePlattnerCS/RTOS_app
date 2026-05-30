@@ -25,10 +25,10 @@ void assert_failed_handler(char const *file, int line, char const *expr);
 
 #else
 
-#define log_error(...)       ((void)0)
-#define log_info(...)        ((void)0)
-#define log_debug(...)       ((void)0)
-#define log_debug_array(...) ((void)0)
+#define log_error(...)       do {} while(0)
+#define log_info(...)        do {} while(0)
+#define log_debug(...)       do {} while(0)
+#define log_debug_array(...) do {} while(0)
 #undef assert
 #define assert(expr)         ((void)0)
 

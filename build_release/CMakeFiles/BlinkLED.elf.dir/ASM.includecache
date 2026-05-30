@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/workspace/CubeMX/startup_stm32f407xx.s
+
+/workspace/include/SEGGER/SEGGER_RTT.h
+SEGGER_RTT_Conf.h
+/workspace/include/SEGGER/SEGGER_RTT_Conf.h
+stdlib.h
+-
+stdarg.h
+-
+stdint.h
+-
+
+/workspace/include/SEGGER/SEGGER_RTT_Conf.h
+
+/workspace/src/SEGGER/SEGGER_RTT_ASM_ARMv7M.S
+SEGGER_RTT.h
+/workspace/src/SEGGER/SEGGER_RTT.h
+

@@ -29,7 +29,10 @@
 //   DWT->CTRL        |= DWT_CTRL_CYCCNTENA_Msk;
 
 // UART transport: notify segger_uart.c to kick the TX whenever an event is recorded.
+// Only active in debug builds (SYSVIEW_ENABLE defined by CMake for Debug config).
+#ifdef SYSVIEW_ENABLE
 void SEGGER_SYSVIEW_X_OnEventRecorded(unsigned NumBytes);
 #define SEGGER_SYSVIEW_ON_EVENT_RECORDED(NumBytes) SEGGER_SYSVIEW_X_OnEventRecorded(NumBytes)
+#endif
 
 #endif /* SEGGER_SYSVIEW_CONF_H */
