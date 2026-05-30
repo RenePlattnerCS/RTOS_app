@@ -24,6 +24,7 @@
 /* USER CODE BEGIN Includes */
 #include "logger/itm.h"
 #include "main_app.h"
+#include "usb/usb_app.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -102,7 +103,8 @@ int main(void)
     MX_TIM2_Init();
     MX_ADC1_Init();
     /* USER CODE BEGIN 2 */
-    ITM_Init(); // <-- ADD THIS LINE
+    ITM_Init();
+    usb_app_init();
     /* USER CODE END 2 */
 
     /* Init scheduler */

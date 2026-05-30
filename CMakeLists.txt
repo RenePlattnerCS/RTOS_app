@@ -35,7 +35,11 @@ add_executable(${PROJECT_NAME}.elf
     src/tasks/blink_led.c
     src/logger/itm.c
     src/logger/logger.c
+    src/logger/assert_handler.c
     src/syscalls.c
+    src/usb/usbd_framework.c
+    src/usb/usbd_driver.c
+    src/usb/usb_app.c
 
     CubeMX/Core/Src/main.c 
     CubeMX/Core/Src/stm32f4xx_it.c
