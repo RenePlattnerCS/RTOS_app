@@ -11,7 +11,7 @@ static void BlinkLEDTask(void *argument)
     for (;;)
     {
         HAL_GPIO_TogglePin(GPIOD, LED_Pin); // toggle LED on PD12
-        vTaskDelay(pdMS_TO_TICKS(6000));    // delay 500ms
+        vTaskDelay(pdMS_TO_TICKS(3000));    // delay 500ms
     }
 }
 

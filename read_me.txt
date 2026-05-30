@@ -1,6 +1,6 @@
 change Cmakelist -> cmake -DCMAKE_BUILD_TYPE=Debug -S . -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE=arm-none-eabi-gcc.cmake 
 build -> ninja -C build
-
+host -> openocd -f interface/stlink.cfg -f target/stm32f4x.cfg   -c "program build/BlinkLED.elf verify reset exit"
 
 1. project.yml — Ceedling Unit Test Config
 tests/unittest/project.yml belongs to Ceedling, a Ruby-based unit test framework for C built on Unity (test runner) and CMock (auto-generated mocks).

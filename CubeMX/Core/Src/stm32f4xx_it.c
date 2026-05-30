@@ -175,5 +175,10 @@ void TIM7_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
+extern UART_HandleTypeDef huart2;
 
+void USART2_IRQHandler(void)
+{
+    HAL_UART_IRQHandler(&huart2);
+}
 /* USER CODE END 1 */

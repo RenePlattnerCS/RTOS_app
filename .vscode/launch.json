@@ -24,6 +24,16 @@
         "load",
         "monitor reset halt"
       ],
+      "rttConfig": {
+                "enabled": true,
+                "address": "auto",
+                "decoders": [
+                    {
+                        "port": 1,
+                        "type": "binary"
+                    }
+                ]
+            },
       "swoConfig": {
         "enabled": true,
         "cpuFrequency": 168000000,

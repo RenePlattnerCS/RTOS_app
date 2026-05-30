@@ -65,6 +65,7 @@ add_executable(${PROJECT_NAME}.elf
     CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.c
     CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c
     CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c
+    CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
     
 
     # FreeRTOS kernel
@@ -83,6 +84,15 @@ add_executable(${PROJECT_NAME}.elf
     CubeMX/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c
 
     CubeMX/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c
+
+    #SEGGER
+    src/SEGGER/SEGGER_SYSVIEW.c
+    src/SEGGER/SEGGER_SYSVIEW_Config_FreeRTOS.c
+    src/SEGGER/SEGGER_SYSVIEW_FreeRTOS.c
+    src/SEGGER/SEGGER_RTT.c
+    src/SEGGER/SEGGER_RTT_ASM_ARMv7M.S
+    src/SEGGER/segger_uart.c
+    src/SEGGER/SEGGER_SYSVIEW_REC.c
 )
 
 # Add this line after the add_executable command
@@ -103,6 +113,7 @@ target_include_directories(${PROJECT_NAME}.elf PRIVATE
 
     
     include
+    include/SEGGER
 )
 
 # Defines
