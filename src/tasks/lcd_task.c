@@ -1,6 +1,7 @@
 // lcd_task.c
 #include "lcd_task.h"
 #include "FreeRTOS.h"
+#include "button_event.h"
 #include "lcd.h"
 #include "main.h"
 #include "shared_state.h"
@@ -9,6 +10,8 @@
 
 extern uint32_t debug_adc;      // from servo_task.c
 extern TIM_HandleTypeDef htim3; // for microsecond delay
+
+char last_event_str[16] = "waiting..."; // shown on row 1
 
 void LcdTask(void *argument)
 {
@@ -36,6 +39,21 @@ void LcdTask(void *argument)
         lcd_print("ADC:            ");
         lcd_set_cursor(1, 5);
         lcd_print_int((int) debug_adc);
+
+        ButtonEvent event;
+        if (xQueueReceive(button_event_queue, &event, 0) == pdTRUE)
+        {
+            // Format event string for LCD row 1
+            snprintf(
+                last_event_str,
+                sizeof(last_event_str),
+                "%s %s",
+                event.name,
+                event.type == BUTTON_EVENT_PRESSED ? "DOWN" : "UP  ");
+        }
+        // Row 1 — last button event
+        lcd_set_cursor(1, 0);
+        lcd_print(last_event_str);
 
         vTaskDelay(pdMS_TO_TICKS(100)); // 10Hz refresh — LCD cant show faster
     }

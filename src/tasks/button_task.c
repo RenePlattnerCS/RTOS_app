@@ -1,11 +1,15 @@
 // button_task.c
 #include "button_task.h"
 #include "FreeRTOS.h"
+#include "button_event.h"
 #include "logger/logger.h"
 #include "main.h"
+#include "shared_state.h"
 #include "task.h"
 
 #define DEBOUNCE_MS 20
+
+extern QueueHandle_t button_event_queue;
 
 typedef struct
 {
@@ -46,7 +50,20 @@ void ButtonTask(void *argument)
                 {
                     btn->last_stable_state = confirmed;
 
-                    if (confirmed == GPIO_PIN_RESET)
+                    ButtonEvent event = {
+                        .button_id = i,
+                        .name      = btn->name,
+                        .type      = (confirmed == GPIO_PIN_RESET) ? BUTTON_EVENT_PRESSED : BUTTON_EVENT_RELEASED,
+                    };
+
+                    // Send to queue — 0 timeout, don't block if queue is full
+                    if (xQueueSend(button_event_queue, &event, 0) != pdTRUE)
+                    {
+                        log_info("button queue full — event dropped");
+                    }
+
+                    // Still log immediately for debug
+                    if (event.type == BUTTON_EVENT_PRESSED)
                         log_info("%s pressed", btn->name);
                     else
                         log_info("%s released", btn->name);
