@@ -10,8 +10,6 @@
 #include "usb/usbd_driver.h"
 #include <usb/Hid/usb_hid_standards.h>
 
-#include "SEGGER_SYSVIEW.h"
-
 static UsbDevice *usbd_handle;
 static void process_control_transfer_stage();
 static void write_mouse_report();
@@ -27,7 +25,6 @@ static uint8_t ep1_needs_prime = 0;
 void usbd_update_joystick(JoystickState *state)
 {
     isr_snapshot = *state; // simple struct copy, one instruction on Cortex-M
-    SEGGER_SYSVIEW_PrintfHost("snapshot x=%d", (int) state->x);
 }
 
 void usbd_initialize(UsbDevice *usb_device)
@@ -300,7 +297,6 @@ static void write_joystick_report(int8_t x, int8_t y, int8_t z, int8_t rx, uint8
         (int) sizeof(report),
         (int) configuration_descriptor_combination.usb_joystick_endpoint_descriptor.wMaxPacketSize);
     */
-    SEGGER_SYSVIEW_PrintfHost("report sent x=%d btn=%d", (int) x, (int) buttons);
 
     usb_driver.write_packet(
         configuration_descriptor_combination.usb_joystick_endpoint_descriptor.bEndpointAddress & 0x0F,

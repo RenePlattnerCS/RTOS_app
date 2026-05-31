@@ -31,8 +31,10 @@ add_executable(${PROJECT_NAME}.elf
     src/main_app.c
     src/tasks/blink_led.c
     src/tasks/servo_task.c
+    src/tasks/lcd_task.c
     src/tasks/usb_mouse_task.c
     src/tasks/usb_joystick_task.c
+    src/tasks/button_task.c
     src/freertos_static.c
     src/tasks/blink_led.c
     src/logger/itm.c
@@ -43,6 +45,7 @@ add_executable(${PROJECT_NAME}.elf
     src/usb/usbd_driver.c
     src/usb/usb_app.c
     src/shared_state.c
+    src/lcd/lcd.c
 
     CubeMX/Core/Src/main.c 
     CubeMX/Core/Src/stm32f4xx_it.c
@@ -116,6 +119,7 @@ target_include_directories(${PROJECT_NAME}.elf PRIVATE
     
     include
     include/SEGGER
+    include/lcd
 )
 
 # Defines

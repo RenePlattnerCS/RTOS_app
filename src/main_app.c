@@ -1,5 +1,6 @@
 #include "main_app.h"
 #include "blink_led.h"
+#include "button_task.h"
 #include "logger/logger.h"
 #include "main.h"
 #include "servo_task.h"
@@ -12,6 +13,7 @@
 #include "SEGGER_SYSVIEW_REC.h"
 
 extern UART_HandleTypeDef huart2;
+extern TIM_HandleTypeDef htim3;
 
 static void sysview_init(void)
 {
@@ -36,4 +38,6 @@ void app_init(void)
     BlinkLEDTask_Create();
     ServoTask_Create();
     UsbJoystickTask_Create();
+    LcdTask_Create();
+    ButtonTask_Create();
 }

@@ -9,6 +9,7 @@
   "cmake.configureOnOpen": true,
   "extensions.ignoreRecommendations": true,
   "cortex-debug.armToolchainPath": "/usr/bin",
-  "C_Cpp.debugShortcut": false
+  "C_Cpp.debugShortcut": false,
+  "cortex-debug.variableUseNaturalFormat": false
 }
 

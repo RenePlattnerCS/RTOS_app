@@ -51,7 +51,6 @@ static void ServoTask(void *argument)
             // Publish ADC reading for the USB HID report.
             // Map 12-bit ADC (0–4095) → signed byte (-127 to +127).
             int8_t axis = (int8_t) ((int32_t) adc_val * 254 / 4095 - 127);
-            log_info("axis value: %d", (int) axis);
             if (xSemaphoreTake(joystick_mutex, pdMS_TO_TICKS(5)) == pdTRUE)
             {
                 joystick_state.x = axis;
