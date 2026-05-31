@@ -292,12 +292,6 @@ static void write_joystick_report(int8_t x, int8_t y, int8_t z, int8_t rx, uint8
         .buttons = buttons,
     };
 
-    /*log_info(
-        "JoystickReport size=%d wMaxPacketSize=%d",
-        (int) sizeof(report),
-        (int) configuration_descriptor_combination.usb_joystick_endpoint_descriptor.wMaxPacketSize);
-    */
-
     usb_driver.write_packet(
         configuration_descriptor_combination.usb_joystick_endpoint_descriptor.bEndpointAddress & 0x0F,
         &report,
@@ -307,7 +301,7 @@ static void write_joystick_report(int8_t x, int8_t y, int8_t z, int8_t rx, uint8
 // In usbd_framework.c — fix the handler to separate EP0 and EP1 logic
 static void in_transfer_completed_handler(uint8_t endpoint_number)
 {
-    log_info("IN transfer completed for EP%d", endpoint_number);
+    // log_info("IN transfer completed for EP%d", endpoint_number);
 
     uint8_t mouse_ep = configuration_descriptor_combination.usb_joystick_endpoint_descriptor.bEndpointAddress & 0x0F;
 

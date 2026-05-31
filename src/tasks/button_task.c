@@ -10,6 +10,7 @@
 #define DEBOUNCE_MS 20
 
 extern QueueHandle_t button_event_queue;
+extern QueueHandle_t button_usb_queue;
 
 typedef struct
 {
@@ -60,6 +61,10 @@ void ButtonTask(void *argument)
                     if (xQueueSend(button_event_queue, &event, 0) != pdTRUE)
                     {
                         log_info("button queue full — event dropped");
+                    }
+                    if (xQueueSend(button_usb_queue, &event, 0) != pdTRUE)
+                    {
+                        log_info("button USB queue full — event dropped");
                     }
 
                     // Still log immediately for debug

@@ -17,6 +17,7 @@ typedef struct
 #define BUTTON_QUEUE_LENGTH 8 // holds up to 8 unprocessed events
 
 extern QueueHandle_t button_event_queue;
+extern QueueHandle_t button_usb_queue;
 
 extern JoystickState joystick_state;
 extern SemaphoreHandle_t joystick_mutex;

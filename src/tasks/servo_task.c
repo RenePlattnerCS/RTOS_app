@@ -43,8 +43,6 @@ static void ServoTask(void *argument)
             if (servo_active)
             {
                 uint32_t pulse = adc_to_pulse(adc_val);
-                debug_adc      = adc_val;
-                debug_pulse    = pulse;
                 __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, pulse);
             }
 
