@@ -14,7 +14,7 @@
 #define SEGGER_RTT_MAX_NUM_DOWN_BUFFERS 2
 
 // Default size of buffer 0 (terminal printf channel).
-#define SEGGER_RTT_BUFFER_SIZE_UP   (4 * 1024)
+#define SEGGER_RTT_BUFFER_SIZE_UP   (4 * 1024 * 2)
 #define SEGGER_RTT_BUFFER_SIZE_DOWN 16
 
 // Mode for buffer 0: block if full (safest for debug output).

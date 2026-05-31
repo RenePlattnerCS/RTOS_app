@@ -32,6 +32,7 @@ add_executable(${PROJECT_NAME}.elf
     src/tasks/blink_led.c
     src/tasks/servo_task.c
     src/tasks/usb_mouse_task.c
+    src/tasks/usb_joystick_task.c
     src/freertos_static.c
     src/tasks/blink_led.c
     src/logger/itm.c
@@ -41,6 +42,7 @@ add_executable(${PROJECT_NAME}.elf
     src/usb/usbd_framework.c
     src/usb/usbd_driver.c
     src/usb/usb_app.c
+    src/shared_state.c
 
     CubeMX/Core/Src/main.c 
     CubeMX/Core/Src/stm32f4xx_it.c

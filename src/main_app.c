@@ -3,6 +3,8 @@
 #include "logger/logger.h"
 #include "main.h"
 #include "servo_task.h"
+#include "shared_state.h"
+#include "usb_joystick_task.h"
 #include "usb_mouse_task.h"
 
 #ifdef SYSVIEW_ENABLE
@@ -24,11 +26,14 @@ static void sysview_init(void)
 
 void app_init(void)
 {
+    shared_state_init(); // creates joystick_mutex — must run before tasks start
+
 #ifdef SYSVIEW_ENABLE
     sysview_init();
 #endif
+
     log_info("Initializing Tasks...");
     BlinkLEDTask_Create();
     ServoTask_Create();
-    UsbMouseTask_Create();
+    UsbJoystickTask_Create();
 }

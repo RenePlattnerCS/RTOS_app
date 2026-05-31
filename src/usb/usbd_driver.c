@@ -522,11 +522,11 @@ static void iepint_handler()
         uint8_t endpoint_number = ffs(daint) - 1;
         uint32_t diepint        = IN_ENDPOINT(endpoint_number)->DIEPINT;
         uint32_t diepctl        = IN_ENDPOINT(endpoint_number)->DIEPCTL;
-        log_info(
+        /*log_info(
             "iepint: EP%d DIEPINT=0x%08X DIEPCTL=0x%08X",
             endpoint_number,
             (unsigned int) diepint,
-            (unsigned int) diepctl);
+            (unsigned int) diepctl);*/
 
         if (diepint & USB_OTG_DIEPINT_XFRC)
         {
@@ -611,7 +611,7 @@ void OTG_FS_IRQHandler(void)
     // IN Endpoint Interrupt
     if (gintsts & USB_OTG_GINTSTS_IEPINT)
     {
-        log_info("IN endpoint interrupt!");
+        // log_info("IN endpoint interrupt!");
         /* An IN endpoint sends data from device to host
          * (e.g. HID reports, CDC serial data).
          * This fires when the hardware has finished transmitting,

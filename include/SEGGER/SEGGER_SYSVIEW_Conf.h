@@ -11,7 +11,7 @@
 
 // RTT buffer size for SystemView events (bytes).
 // Increase if events are dropped under high task/ISR load.
-#define SEGGER_SYSVIEW_RTT_BUFFER_SIZE 4096
+#define SEGGER_SYSVIEW_RTT_BUFFER_SIZE (4096 * 2)
 
 // Lowest RAM address on STM32F407 (start of SRAM1).
 // Used to compress task/object IDs — set to actual RAM base.
