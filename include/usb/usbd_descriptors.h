@@ -23,7 +23,7 @@ const UsbDeviceDescriptor device_descriptor = {
 
 // usbd_descriptors.h
 
-const uint8_t hid_report_descriptor[] = {
+const uint8_t hid_report_descriptor_mouse[] = {
     0x05, 0x01, // Usage Page (Generic Desktop)
     0x09, 0x02, // Usage (Mouse)
     0xA1, 0x01, // Collection (Application)
@@ -60,20 +60,86 @@ const uint8_t hid_report_descriptor[] = {
     0xC0  // End Collection
 };
 
+// joystick
+const uint8_t hid_report_descriptor_joystick[] = {
+    0x05,
+    0x01, // Usage Page (Generic Desktop)
+    0x09,
+    0x04, // Usage (Joystick)  ← was 0x02 Mouse
+    0xA1,
+    0x01, // Collection (Application)
+
+    // --- Axes ---
+    0x09,
+    0x01, //   Usage (Pointer)
+    0xA1,
+    0x00, //   Collection (Physical)
+
+    0x09,
+    0x30, //     Usage (X)
+    0x09,
+    0x31, //     Usage (Y)
+    0x09,
+    0x32, //     Usage (Z)
+    0x09,
+    0x33, //     Usage (Rx)
+    0x15,
+    0x81, //     Logical Minimum (-127)
+    0x25,
+    0x7F, //     Logical Maximum (127)
+    0x75,
+    0x08, //     Report Size (8 bits)
+    0x95,
+    0x04, //     Report Count (4 axes)
+    0x81,
+    0x02, //     Input (Data, Var, Abs)
+
+    0xC0, //   End Collection (Physical)
+
+    // --- Buttons ---
+    0x05,
+    0x09, //   Usage Page (Buttons)
+    0x19,
+    0x01, //   Usage Minimum (1)
+    0x29,
+    0x08, //   Usage Maximum (8)  ← 8 buttons
+    0x15,
+    0x00, //   Logical Minimum (0)
+    0x25,
+    0x01, //   Logical Maximum (1)
+    0x75,
+    0x01, //   Report Size (1 bit)
+    0x95,
+    0x08, //   Report Count (8)
+    0x81,
+    0x02, //   Input (Data, Var, Abs)
+
+    0xC0 // End Collection (Application)
+};
+
 typedef struct __attribute__((packed))
 {
     uint8_t buttons;
     int8_t x;
     int8_t y;
     uint8_t reserved;
-} HidReport;
+} MouseReport;
+
+typedef struct __attribute__((packed))
+{
+    int8_t x;        // axis 0  [-127, 127]
+    int8_t y;        // axis 1
+    int8_t z;        // axis 2
+    int8_t rx;       // axis 3
+    uint8_t buttons; // bits 0-7 = buttons 1-8
+} JoystickReport;
 
 typedef struct
 {
     UsbConfigurationDescriptor usb_configuration_descriptor;
     UsbInterfaceDescriptor usb_interface_descriptor;
-    UsbHidDescriptor usb_mouse_hid_descriptor;
-    UsbEndpointDescriptor usb_mouse_endpoint_descriptor;
+    UsbHidDescriptor usb_joystick_hid_descriptor;
+    UsbEndpointDescriptor usb_joystick_endpoint_descriptor;
 } UsbConfigurationDescriptorCombination;
 
 const UsbConfigurationDescriptorCombination configuration_descriptor_combination = {
@@ -99,23 +165,23 @@ const UsbConfigurationDescriptorCombination configuration_descriptor_combination
          .bInterfaceSubClass = USB_PROTOCOL_NONE,
          .bInterfaceProtocol = USB_PROTOCOL_NONE,
          .iInterface         = 0},
-    .usb_mouse_hid_descriptor =
+    .usb_joystick_hid_descriptor =
         {.bLength            = sizeof(UsbHidDescriptor),
          .bDescriptorType    = USB_DESCRIPTOR_TYPE_HID,
          .bcdHID             = 0x0100,
          .bCountryCode       = USB_HID_COUNTRY_NONE,
          .bNumDescriptors    = 1,
          .bDescriptorType0   = USB_DESCRIPTOR_TYPE_HID_REPORT,
-         .wDescriptorLength0 = sizeof(hid_report_descriptor)},
-    .usb_mouse_endpoint_descriptor =
+         .wDescriptorLength0 = sizeof(hid_report_descriptor_joystick)},
+    .usb_joystick_endpoint_descriptor =
         {
             // this entpoint will transver the data ov the mouse => position and buttons
             .bLength          = sizeof(UsbEndpointDescriptor),
             .bDescriptorType  = USB_DESCRIPTOR_TYPE_ENDPOINT,
             .bEndpointAddress = 0x81, // choose In entpoint(8) number 1
             .bmAttributes     = USB_ENDPOINT_TYPE_INTERRUPT,
-            .wMaxPacketSize   = 4, // mouse only needs 4 bytes was 64!!
-            .bInterval        = 64 // poll every 10ms (was 50ms = very sluggish)
+            .wMaxPacketSize   = sizeof(JoystickReport), // mouse only needs 4 bytes was 64!!
+            .bInterval        = 64                      // poll every 10ms (was 50ms = very sluggish)
         }
 
 };

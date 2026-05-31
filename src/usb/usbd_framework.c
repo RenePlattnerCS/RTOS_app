@@ -54,9 +54,9 @@ static void usb_reset_received_handler()
 void usbd_configure()
 {
     usb_driver.configure_in_endpoint(
-        (configuration_descriptor_combination.usb_mouse_endpoint_descriptor.bEndpointAddress & 0x0F),
-        (configuration_descriptor_combination.usb_mouse_endpoint_descriptor.bmAttributes & 0x03),
-        configuration_descriptor_combination.usb_mouse_endpoint_descriptor.wMaxPacketSize);
+        (configuration_descriptor_combination.usb_joystick_endpoint_descriptor.bEndpointAddress & 0x0F),
+        (configuration_descriptor_combination.usb_joystick_endpoint_descriptor.bmAttributes & 0x03),
+        configuration_descriptor_combination.usb_joystick_endpoint_descriptor.wMaxPacketSize);
     // Explicitly unmask XFRC for EP1 in DIEPMSK (should already be set but verify)
     SET_BIT(USB_OTG_FS_DEVICE->DIEPMSK, USB_OTG_DIEPMSK_XFRCM);
 
@@ -145,15 +145,15 @@ static void process_standard_interface_request()
     switch (descriptor_type)
     {
         case USB_DESCRIPTOR_TYPE_HID_REPORT:
-            log_info("Sending HID report descriptor (%d bytes)", sizeof(hid_report_descriptor));
-            usbd_handle->ptr_in_buffer          = &hid_report_descriptor;
-            usbd_handle->in_data_size           = sizeof(hid_report_descriptor);
+            log_info("Sending HID report descriptor (%d bytes)", sizeof(hid_report_descriptor_joystick));
+            usbd_handle->ptr_in_buffer          = &hid_report_descriptor_joystick;
+            usbd_handle->in_data_size           = sizeof(hid_report_descriptor_joystick);
             usbd_handle->control_transfer_stage = USB_CONTROL_STAGE_DATA_IN;
             hid_ready                           = 1;
             break;
 
         case USB_DESCRIPTOR_TYPE_HID:
-            usbd_handle->ptr_in_buffer = &configuration_descriptor_combination.usb_mouse_hid_descriptor;
+            usbd_handle->ptr_in_buffer = &configuration_descriptor_combination.usb_joystick_hid_descriptor;
 
             usbd_handle->in_data_size = sizeof(UsbHidDescriptor);
 
@@ -240,12 +240,14 @@ static void process_control_transfer_stage()
                 log_info("STATUS_IN: device configured, NOT sending  first mouse report.");
             }
             break;
+        default:
+            break;
     }
 }
 
 static void write_mouse_report()
 {
-    HidReport report = {
+    MouseReport report = {
         .buttons  = 0,
         .x        = 5,
         .y        = 0,
@@ -253,12 +255,12 @@ static void write_mouse_report()
     };
 
     log_info(
-        "HidReport size=%d wMaxPacketSize=%d",
+        "MouseReport size=%d wMaxPacketSize=%d",
         (int) sizeof(report),
-        (int) configuration_descriptor_combination.usb_mouse_endpoint_descriptor.wMaxPacketSize);
+        (int) configuration_descriptor_combination.usb_joystick_endpoint_descriptor.wMaxPacketSize);
 
     usb_driver.write_packet(
-        (configuration_descriptor_combination.usb_mouse_endpoint_descriptor.bEndpointAddress & 0x0F),
+        (configuration_descriptor_combination.usb_joystick_endpoint_descriptor.bEndpointAddress & 0x0F),
         &report,
         sizeof(report));
 
@@ -272,12 +274,33 @@ static void write_mouse_report()
     log_info("EP1 DTXFSTS (free words): %lu", IN_ENDPOINT(1)->DTXFSTS & 0xFFFF);
 }
 
+static void write_joystick_report(int8_t x, int8_t y, int8_t z, int8_t rx, uint8_t buttons)
+{
+    JoystickReport report = {
+        .x       = x,
+        .y       = y,
+        .z       = z,
+        .rx      = rx,
+        .buttons = buttons,
+    };
+
+    /*log_info(
+        "JoystickReport size=%d wMaxPacketSize=%d",
+        (int) sizeof(report),
+        (int) configuration_descriptor_combination.usb_joystick_endpoint_descriptor.wMaxPacketSize);
+    */
+    usb_driver.write_packet(
+        configuration_descriptor_combination.usb_joystick_endpoint_descriptor.bEndpointAddress & 0x0F,
+        &report,
+        sizeof(report));
+}
+
 // In usbd_framework.c — fix the handler to separate EP0 and EP1 logic
 static void in_transfer_completed_handler(uint8_t endpoint_number)
 {
     log_info("IN transfer completed for EP%d", endpoint_number);
 
-    uint8_t mouse_ep = configuration_descriptor_combination.usb_mouse_endpoint_descriptor.bEndpointAddress & 0x0F;
+    uint8_t mouse_ep = configuration_descriptor_combination.usb_joystick_endpoint_descriptor.bEndpointAddress & 0x0F;
 
     if (endpoint_number == 0)
     {
@@ -307,8 +330,8 @@ static void in_transfer_completed_handler(uint8_t endpoint_number)
     }
     else if (endpoint_number == mouse_ep)
     {
-        log_info("EP1 IN transfer completed — sending next report.");
-        write_mouse_report();
+        // log_info("EP1 IN transfer completed — sending next report.");
+        write_joystick_report(0, 0, 0, 0, 1);
     }
 }
 

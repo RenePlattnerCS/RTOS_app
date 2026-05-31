@@ -14,8 +14,8 @@ extern UART_HandleTypeDef huart2;
 static void sysview_init(void)
 {
     CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
-    DWT->CYCCNT       = 0;
-    DWT->CTRL        |= DWT_CTRL_CYCCNTENA_Msk;
+    DWT->CYCCNT = 0;
+    DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
     SYSVIEW_UART_Config();
     SEGGER_SYSVIEW_Conf();
     SEGGER_SYSVIEW_Start();

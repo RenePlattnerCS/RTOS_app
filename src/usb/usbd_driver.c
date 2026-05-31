@@ -533,11 +533,13 @@ static void iepint_handler()
             usb_events.on_in_transfer_completed(endpoint_number);
             SET_BIT(IN_ENDPOINT(endpoint_number)->DIEPINT, USB_OTG_DIEPINT_XFRC);
         }
+        /*
         // Also check for TXFE (FIFO empty) on EP1
         if (endpoint_number != 0 && (diepint & USB_OTG_DIEPINT_TXFE))
         {
-            log_info("EP%d TXFE set — FIFO drained without XFRC", endpoint_number);
+            //log_info("EP%d TXFE set — FIFO drained without XFRC", endpoint_number);
         }
+        */
         daint &= ~(1 << endpoint_number);
     }
 }
@@ -648,7 +650,7 @@ void OTG_FS_IRQHandler(void)
     if (gintsts & USB_OTG_GINTSTS_IEPINT)
     {
         uint32_t daint = USB_OTG_FS_DEVICE->DAINT;
-        log_info("IEPINT fired: DAINT=0x%08X", (unsigned int) daint);
+        // log_info("IEPINT fired: DAINT=0x%08X", (unsigned int) daint);
     }
     //---------------------------------------------------------------------------------------------
 
